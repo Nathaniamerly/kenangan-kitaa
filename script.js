@@ -20,32 +20,34 @@ document.getElementById('restartButton').addEventListener('click', () => showScr
 
 
 
-const audioCandidates = ['lagu-kita.mp3', 'lagu-kita.mp3.mpeg'];
+const audioCandidates = ['assets/lagu-kita.mp3', 'assets/lagu-kita.mp3.mpeg'];
 const audio = document.getElementById('backgroundMusic');
 const musicButton = document.getElementById('musicButton');
 
 let selectedAudioSource = null;
 
 const tryLoadAudio = () => {
-  for (const fileName of audioCandidates) {
-    const candidate = `assets/${fileName}`;
+  let resolved = false;
+
+  audioCandidates.forEach((candidate) => {
     const testAudio = new Audio(candidate);
     testAudio.preload = 'metadata';
+
     testAudio.addEventListener('loadedmetadata', () => {
-      selectedAudioSource = candidate;
-      audio.src = candidate;
-      audio.load();
-    }, { once: true });
-    testAudio.addEventListener('error', () => {
-      if (fileName === audioCandidates[audioCandidates.length - 1]) {
-        musicButton.textContent = '♪';
-        musicButton.disabled = true;
+      if (!resolved) {
+        resolved = true;
+        selectedAudioSource = candidate;
+        audio.src = candidate;
+        audio.load();
       }
     }, { once: true });
-    testAudio.load();
 
-    if (selectedAudioSource) break;
-  }
+    testAudio.addEventListener('error', () => {
+      // ignore failed probes; keep going until one valid source loads
+    }, { once: true });
+
+    testAudio.load();
+  });
 };
 
 tryLoadAudio();
@@ -63,8 +65,10 @@ audio.addEventListener('pause', () => {
 
 audio.addEventListener('error', () => {
   console.error('Audio gagal dimuat:', audio.error);
-  musicButton.textContent = '♪';
-  musicButton.disabled = true;
+  if (!selectedAudioSource) {
+    musicButton.textContent = '♪';
+    musicButton.disabled = true;
+  }
 });
 
 musicButton.addEventListener('click', async () => {
