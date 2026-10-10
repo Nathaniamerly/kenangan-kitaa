@@ -23,6 +23,9 @@ document.getElementById('restartButton').addEventListener('click', () => showScr
 const audio = document.getElementById('backgroundMusic');
 const musicButton = document.getElementById('musicButton');
 
+musicButton.disabled = false;
+musicButton.removeAttribute('disabled');
+
 const audioSource = 'assets/lagu-kita.mp3';
 audio.src = audioSource;
 audio.load();
@@ -31,21 +34,29 @@ audio.loop = true;
 audio.preload = 'auto';
 
 audio.addEventListener('play', () => {
+  musicButton.disabled = false;
+  musicButton.removeAttribute('disabled');
   musicButton.textContent = 'Ⅱ';
 });
 
 audio.addEventListener('pause', () => {
+  musicButton.disabled = false;
+  musicButton.removeAttribute('disabled');
   musicButton.textContent = '▶';
 });
 
 audio.addEventListener('error', () => {
   console.error('Audio gagal dimuat:', audio.error);
   musicButton.textContent = '♪';
-  musicButton.disabled = true;
+  musicButton.disabled = false;
+  musicButton.removeAttribute('disabled');
 });
 
 musicButton.addEventListener('click', async () => {
   try {
+    musicButton.disabled = false;
+    musicButton.removeAttribute('disabled');
+
     if (audio.paused) {
       await audio.play();
     } else {
@@ -54,6 +65,8 @@ musicButton.addEventListener('click', async () => {
   } catch (error) {
     console.error('Musik gagal diputar:', error);
     musicButton.textContent = '♪';
+    musicButton.disabled = false;
+    musicButton.removeAttribute('disabled');
   }
 });
 
