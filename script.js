@@ -20,40 +20,15 @@ document.getElementById('restartButton').addEventListener('click', () => showScr
 
 
 
-const audioCandidates = ['assets/lagu-kita.mp3', 'assets/lagu-kita.mp3.mpeg'];
 const audio = document.getElementById('backgroundMusic');
 const musicButton = document.getElementById('musicButton');
 
-let selectedAudioSource = null;
-
-const tryLoadAudio = () => {
-  let resolved = false;
-
-  audioCandidates.forEach((candidate) => {
-    const testAudio = new Audio(candidate);
-    testAudio.preload = 'metadata';
-
-    testAudio.addEventListener('loadedmetadata', () => {
-      if (!resolved) {
-        resolved = true;
-        selectedAudioSource = candidate;
-        audio.src = candidate;
-        audio.load();
-      }
-    }, { once: true });
-
-    testAudio.addEventListener('error', () => {
-      // ignore failed probes; keep going until one valid source loads
-    }, { once: true });
-
-    testAudio.load();
-  });
-};
-
-tryLoadAudio();
+const audioSource = 'assets/lagu-kita.mp3';
+audio.src = audioSource;
+audio.load();
 
 audio.loop = true;
-audio.preload = 'metadata';
+audio.preload = 'auto';
 
 audio.addEventListener('play', () => {
   musicButton.textContent = 'Ⅱ';
@@ -65,19 +40,12 @@ audio.addEventListener('pause', () => {
 
 audio.addEventListener('error', () => {
   console.error('Audio gagal dimuat:', audio.error);
-  if (!selectedAudioSource) {
-    musicButton.textContent = '♪';
-    musicButton.disabled = true;
-  }
+  musicButton.textContent = '♪';
+  musicButton.disabled = true;
 });
 
 musicButton.addEventListener('click', async () => {
   try {
-    if (!selectedAudioSource) {
-      musicButton.textContent = '♪';
-      return;
-    }
-
     if (audio.paused) {
       await audio.play();
     } else {
