@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f7f8ff" />
+  <title>For You, Chaii ♡</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="music-pill" aria-label="Kontrol musik">
+    <span class="music-note">♫</span>
+    <button id="musicButton" class="music-button" type="button" aria-label="Putar atau jeda musik">▶</button>
+  </div>
+
+  <main class="site-shell">
+    <section class="screen active" id="welcomeScreen">
+      <div class="tiny-hearts" aria-hidden="true">♡　♥　♡</div>
+      <div class="sticker" aria-hidden="true">૮ ˶ᵔ ᵕ ᵔ˶ ა<br/><span>♡</span></div>
+      <p class="eyebrow">a little something for you</p>
+      <h1>Are you ready<br />to open this?</h1>
+      <p class="subtext">aku punya sesuatu kecik buat sayungg ♡</p>
+      <div class="button-row">
+        <button class="btn primary" id="yesButton">yes! ♡</button>
+        <button class="btn secondary" id="noButton">no</button>
+      </div>
+      <p class="hint" id="hintText">pilih yang yes yaa hehe</p>
+    </section>
+
+    <section class="screen" id="teaseScreen">
+      <div class="sticker blue" aria-hidden="true">૮₍ ˶•⤙•˶ ₎ა</div>
+      <p class="eyebrow">wait a little…</p>
+      <h1>Okay last one,<br />I made something<br />for you.</h1>
+      <p class="subtext">dibuat waktu sayangg boboo hihi, special for uu ♡</p>
+      <button class="btn primary" id="continueButton">lanjut →</button>
+    </section>
+
+    <section class="screen" id="musicScreen">
+      <div class="mini-player">
+
+<div class="album-art">
+  <img src="assets/foto6.jpeg" alt="Foto kenangan kita">
+</div>
+
+        <div class="player-copy">
+          <p class="eyebrow">songs that remind me of us</p>
+          <h2>Ceritanya Jatuh Cinta</h2>
+          <p>Ini lagu yang selalu aku sama kamu suka dengernyaa ,dan aku selalu inget sama kamu kalau dengerin lagu ini ♡</p>
+          <div class="lagu-kita"><span>♡</span> our song <span class="lagu-kita.mp3">♡</span></div>
+          <div class="fake-track"><span>♫</span> a song for you <span class="track-time">♡</span></div>
+          <div class="fake-track"><span>✧</span> memories <span class="track-time">♡</span></div>
+        </div>
+      </div>
+      <button class="btn primary" id="letterButton">lanjut →</button>
+    </section>
+
+    <section class="screen letter-screen" id="letterScreen">
+      <div class="floating-decor" aria-hidden="true">🎀 🩷 🌻 ☃️ 🌸 🧸 💌</div>
+      <p class="eyebrow">a letter for my favorite person</p>
+      <h1>Happy day,<br />my lovee ♡</h1>
+      <article class="letter-card">
+        <p>hayiii sayanggg cintakuu,</p>
+        <p>aku mau bilang maacii karena sudah jadi bagian yang indah di hidupku sengg. terimaaci buat semua tawa, candaan, cerita random, perhatian kecil, kenangan yang kita buat bareng, dan apapun yang udah kamu kasih ke aku. kamu selalu berusaha bikin aku seneng, dan aku juga selalu bangga setiap liat pencapaianmu, pacarkuu kerenn!! terimakasih untuk segala effort, uang, tenaga, dan hal lainnya yang sayang berikann ke aku.</p>
+        <p>akuu beruntungg, terimaaci sudah mau pilih aku untuk jadi teman hidupmuu hehe, aku mungkin ngga selalu bisa mengungkapkan semuanya dengan sempurna, tapi aku harap sayangg selalu tahu kalau kamu berarti banget buat akuu. Semoga kita bisa terus belajar, bertumbuh, dan bikin lebih banyak kenangan bareng yang tiap harinya akan selalu adaa! kalau hari harinya terasa beratt, isokee! aku yakin sayang pasti bisa laluin dan selesein dengan baikk, gapapa penuh dengan cape, pusing, riweuh, dan bingungg, wajar koqq, tapi sayangg harus ingett, sayang pasti bisaa!! aku selalu doain sayangg</p>
+        <p class="signoff">God Bless uu sengg. with lots of love, me ♡</p>
+      </article>
+      <button class="btn primary" id="memoriesButton">lihat kenangan kita yuk</button>
+    </section>
+
+    <section class="screen memories-screen" id="memoriesScreen">
+      <p class="eyebrow">little moments, big memories</p>
+      <h1>₊˚⊹♡ every moment with you ♡⊹˚₊</h1>
+      <p class="subtext">setiap foto punya cerita sendiri.</p>
+      <div class="photo-window" aria-label="Foto kenangan berjalan">
+        <div class="photo-track" id="photoTrack">
+          <!-- Ganti foto contoh di folder assets; lihat README.txt -->
+          <figure class="memory-photo"><img src="assets/foto1.jpeg" alt="Kenangan kita 1" /><figcaption>our little moment ♡</figcaption></figure>
+          <figure class="memory-photo"><img src="assets/foto2.jpeg" alt="Kenangan kita 2" /><figcaption>one of my favorites ✨</figcaption></figure>
+          <figure class="memory-photo"><img src="assets/foto3.jpeg" alt="Kenangan kita 3" /><figcaption>just us 💗</figcaption></figure>
+          <figure class="memory-photo"><img src="assets/foto4.jpeg" alt="Kenangan kita 4" /><figcaption>happy with you ♡</figcaption></figure>
+          <figure class="memory-photo"><img src="assets/foto5.jpeg" alt="Kenangan kita 5" /><figcaption>more memories to come</figcaption></figure>
+        </div>
+      </div>
+      <div class="dots" id="photoDots" aria-label="Pilih foto"></div>
+      <p class="small-note">biarin fotonya berjalan otomatis yaa ♡</p>
+      <button class="btn primary" id="finalButton">oiyaa ada satu hal lagi…</button>
+    </section>
+
+    <section class="screen final-screen" id="finalScreen">
+      <div class="big-heart" aria-hidden="true">♥</div>
+      <p class="eyebrow">to my favorite human</p>
+      <h1>I choose you,<br />again and again.</h1>
+      <p class="subtext">makasih sudah jadi pacarkuu yang uwaww ketce baday dan membahana. timaaci juga blunoo! selalu sayang aku yaa kaliann.. semoga cerita kita sampaii nikah, punya anak cucu, hidup sejahteraa menua bersamaa sayang teruss, (calon suamikkuu) ♡</p>
+      <button class="btn secondary" id="restartButton">ulang dari awal ↻</button>
+      <p class="signature">made with love ♡</p>
+    </section>
+  </main>
+
+  <audio id="backgroundMusic" loop preload="none"></audio>
+  <script src="script.js"></script>
+</body>
+</html>
