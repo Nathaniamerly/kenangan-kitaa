@@ -19,18 +19,40 @@ document.getElementById('finalButton').addEventListener('click', () => showScree
 document.getElementById('restartButton').addEventListener('click', () => showScreen('welcomeScreen'));
 
 
-// Nama file musik di dalam folder assets
 
-
-const musicFile = 'lagu-kita.mp3.mpeg';
+const audioCandidates = ['lagu-kita.mp3', 'lagu-kita.mp3.mpeg'];
 const audio = document.getElementById('backgroundMusic');
 const musicButton = document.getElementById('musicButton');
 
-audio.src = `assets/${musicFile}`;
-audio.loop = true;
-audio.autoplay = true;
+let selectedAudioSource = null;
 
-// Ikon tombol mengikuti status musik
+const tryLoadAudio = () => {
+  for (const fileName of audioCandidates) {
+    const candidate = `assets/${fileName}`;
+    const testAudio = new Audio(candidate);
+    testAudio.preload = 'metadata';
+    testAudio.addEventListener('loadedmetadata', () => {
+      selectedAudioSource = candidate;
+      audio.src = candidate;
+      audio.load();
+    }, { once: true });
+    testAudio.addEventListener('error', () => {
+      if (fileName === audioCandidates[audioCandidates.length - 1]) {
+        musicButton.textContent = '♪';
+        musicButton.disabled = true;
+      }
+    }, { once: true });
+    testAudio.load();
+
+    if (selectedAudioSource) break;
+  }
+};
+
+tryLoadAudio();
+
+audio.loop = true;
+audio.preload = 'metadata';
+
 audio.addEventListener('play', () => {
   musicButton.textContent = 'Ⅱ';
 });
@@ -39,25 +61,27 @@ audio.addEventListener('pause', () => {
   musicButton.textContent = '▶';
 });
 
-// Tombol untuk memutar atau menjeda musik
+audio.addEventListener('error', () => {
+  console.error('Audio gagal dimuat:', audio.error);
+  musicButton.textContent = '♪';
+  musicButton.disabled = true;
+});
+
 musicButton.addEventListener('click', async () => {
   try {
+    if (!selectedAudioSource) {
+      musicButton.textContent = '♪';
+      return;
+    }
+
     if (audio.paused) {
       await audio.play();
     } else {
       audio.pause();
     }
   } catch (error) {
-    alert('Musik belum bisa diputar. Cek nama dan lokasi file musiknya yaa ♡');
-  }
-});
-
-// Coba putar musik otomatis saat halaman dibuka
-window.addEventListener('load', async () => {
-  try {
-    await audio.play();
-  } catch (error) {
-    musicButton.textContent = '▶';
+    console.error('Musik gagal diputar:', error);
+    musicButton.textContent = '♪';
   }
 });
 
